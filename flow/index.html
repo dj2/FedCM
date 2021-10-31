@@ -1,0 +1,819 @@
+<!doctype html>
+<html>
+<head>
+  <title>FedCM Flows</title>
+  <style>
+* { box-sizing: border-box; }
+
+  img {
+    width: 50vw;
+  }
+  ol {
+    margin: 0;
+    padding: 0;
+    padding-left: 1em;
+  }
+  #flows > li {
+    border-bottom: 1px dashed #333;
+    padding-bottom: 1em;
+  }
+  .wrap {
+    display: flex;
+    align-items: start;
+  }
+  .wrap ol {
+    margin-left: 1em;
+  }
+  pre {
+    padding: 5px;
+    margin: 0;
+    background-color: #eee;
+    border: 1px solid #333;
+    border-radius: 4px;
+  }
+  code {
+    background-color:  #eee;
+  }
+
+  #toc > h3, #toc h4 {
+    margin: 0;
+    padding: 0;
+  }
+  #toc > h4 {
+    padding-left: 1em;
+  }
+  </style>
+</head>
+<body>
+  <h1>FedCM Flows</h1>
+
+  <div id='toc'>
+    <h2>Table of Contents</h2>
+    <h3><a href="#flows">Flows</a></h3>
+    <h4><a href="#well-known-endpoint-failure">Well-Known endpoint failure</a></h4>
+    <h4><a href="#client-id-metatadata-failed">Client ID Metadata Failed</a></h4>
+    <h4><a href="#consent-decline">Consent Decline</a></h4>
+    <h4><a href="#accounts-endpoint-failure">Accounts Endpoint Failure</a></h4>
+    <h4><a href="#no-account-selected">No Account Selected</a></h4>
+    <h4><a href="#account-selected-successfully">Account Selected Successfully</a></h4>
+    <h4><a href="#credential-found-in-credential-store">Credential found in credential store</a></h4>
+    <h4><a href="#invalid-token-response">Invalid Token Response</a></h4>
+    <h4><a href="#successful-token-request">Successful Token Request</a></h4>
+    <h4><a href="#multi-token-request">Multi-Token Request</a></h4>
+    <h4><a href="#invalid-token-request">Invalid Token Request</a></h4>
+    <h4><a href="#refresh-token-request">Refresh Token Request</a></h4>
+    <h4><a href="#revocation-failure">Revocation Failure</a></h4>
+    <h4><a href="#revocation-successful">Revocation Successful</a></h4>
+    <h4><a href="#idp-logout">IDP Logout</a></h4>
+    <h4><a href="#rp-logout">RP Logout</a></h4>
+    <h3><a href="#code-example">Code Example</a></h3>
+  </div>
+
+  <h2><a name="flows">Flows</a> <a href="#flows">§</a></h2>
+  <ol id='flows'>
+  <li>
+    <h3><a name="well-known-endpoint-failure">Well-Known endpoint failure</a>
+       <a href="#well-known-endpoint-failure">§</a></h3>
+    <p>In this example the <code>.well-known/fedcm</code> file is not returned
+    successfully from the IDP.</p>
+
+    <div class='wrap'>
+      <img src="img/01 - Well-known endpoint failure.svg">
+
+      <ol>
+        <li><em>User</em> requests <em>UA</em> load <code>rp.example.com</code></li>
+        <li><em>UA</em> requests page from <em>RP</em></li>
+        <li><em>RP</em> executes JavaScript:
+          <pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+let p = await navigator.credentials.get(data);</pre></code>
+        </li>
+        <li><em>UA</em> looks for credentials in credential store, finds none.</li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> requests <code>.well-known/fedcm</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns non-200 response, or invalid JSON data</li>
+        <li><em>UA</em> calls <code>p.reject()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="client-id-metatadata-failed">Client ID Metadata Failed</a>
+       <a href="#client-id-metatadata-failed">§</a></h3>
+    <p>In this example the <code>client_id_metadata_endpoint</code> is not
+    returned successfully from the IDP.</p>
+
+    <div class='wrap'>
+      <img src="img/02 - Client id metadata failed.svg">
+      <ol>
+        <li><em>User</em> requests <em>UA</em> load <code>rp.example.com</code></li>
+        <li><em>UA</em> requests page from <em>RP</em></li>
+        <li><em>RP</em> executes JavaScript:
+          <pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+let p = await navigator.credentials.get(data);</pre></code>
+        </li>
+        <li><em>UA</em> looks for credentials in credential store, finds none.</li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> requests <code>.well-known/fedcm</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> requests
+          <code>json["client_id_metadata_endpoint"]</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>client_id</code></il>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns non-200 response, or invalid JSON data</li>
+        <li><em>UA</em> calls <code>p.reject()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="consent-decline">Consent Decline</a>
+       <a href="#consent-decline">§</a></h3>
+    <p>In this example the <em>User</em> declines permission to let <em>RP</em>
+       request information from <em>IDP</em>.</p>
+
+    <div class='wrap'>
+      <img src="img/03 - Consent Decline.svg">
+      <ol>
+        <li><em>User</em> requests <em>UA</em> load <code>rp.example.com</code></li>
+        <li><em>UA</em> requests page from <em>RP</em></li>
+        <li><em>RP</em> executes JavaScript:
+          <pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+let p = await navigator.credentials.get(data);</pre></code>
+        </li>
+        <li><em>UA</em> looks for credentials in credential store, finds none.</li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> requests <code>.well-known/fedcm</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> requests
+          <code>json["client_id_metadata_endpoint"]</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>client_id</code></il>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns valid JSON response</li>
+        <li><em>UA</em> presents consent sheet to <em>User</em>.
+          Sheet includes <strong>ToS</strong>, <strong>Privacy Policy</strong>
+          and consent to share <strong>name</strong> and <strong>email</strong>
+          with <em>RP</em>.</li>
+        <li><em>User</em> declines to share information</li>
+        <li><em>UA</em> calls <code>p.reject()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="accounts-endpoint-failure">Accounts Endpoint Failure</a>
+       <a href="#accounts-endpoint-failure">§</a></h3>
+    <p>In this example the request to the <code>accounts_endpoint</code> returns
+    an invalid response from the <em>IDP</em>.</p>
+
+    <div class='wrap'>
+      <img src="img/04 - Accounts endpoint failure.svg">
+      <ol>
+        <li><em>User</em> requests <em>UA</em> load <code>rp.example.com</code></li>
+        <li><em>UA</em> requests page from <em>RP</em></li>
+        <li><em>RP</em> executes JavaScript:
+          <pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+let p = await navigator.credentials.get(data);</pre></code>
+        </li>
+        <li><em>UA</em> looks for credentials in credential store, finds none.</li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> requests <code>.well-known/fedcm</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> requests
+          <code>json["client_id_metadata_endpoint"]</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>client_id</code></il>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns valid JSON response</li>
+        <li><em>UA</em> presents consent sheet to <em>User</em>.
+          Sheet includes <strong>ToS</strong>, <strong>Privacy Policy</strong>
+          and consent to share <strong>name</strong> and <strong>email</strong>
+          with <em>RP</em>.</li>
+        <li><em>User</em> accepts to share information</li>
+        <li><em>UA</em> requests <code>json["accounts_endpoint"]</code>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns non-200 response, or invalid JSON data</li>
+        <li><em>UA</em> calls <code>p.reject()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="no-account-selected">No Account Selected</a>
+       <a href="#no-account-selected">§</a></h3>
+    <p>In this flow, the <em>User</em> dismisses the account chooser without
+    selecting an account.</p>
+    <div class='wrap'>
+      <img src="img/05 - No account selected.svg">
+      <ol>
+        <li><em>User</em> requests <em>UA</em> load <code>rp.example.com</code></li>
+        <li><em>UA</em> requests page from <em>RP</em></li>
+        <li><em>RP</em> executes JavaScript:
+          <pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+let p = await navigator.credentials.get(data);</pre></code>
+        </li>
+        <li><em>UA</em> looks for credentials in credential store, finds none.</li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> requests <code>.well-known/fedcm</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> requests
+          <code>json["client_id_metadata_endpoint"]</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>client_id</code></il>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns valid JSON response</li>
+        <li><em>UA</em> presents consent sheet to <em>User</em>.
+          Sheet includes <strong>ToS</strong>, <strong>Privacy Policy</strong>
+          and consent to share <strong>name</strong> and <strong>email</strong>
+          with <em>RP</em>.</li>
+        <li><em>User</em> accepts to share information</li>
+        <li><em>UA</em> requests <code>json["accounts_endpoint"]</code>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> presents account chooser sheet to <em>User</em>.
+        Sheet lists all accounts return from the account endpoint.</li>
+        <li><em>User</em> dismisses sheet without selecting an account.</li>
+        <li><em>UA</em> calls <code>p.reject()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="account-selected-successfully">Account Selected Successfully</a>
+       <a href="#account-selected-successfully">§</a></h3>
+    <p>In this flow the <em>User</em> selects an account from the account
+    chooser and a credential is returned to the user.</p>
+
+    <div class='wrap'>
+      <img src="img/06 - Account selected.svg">
+      <ol>
+        <li><em>User</em> requests <em>UA</em> load <code>rp.example.com</code></li>
+        <li><em>UA</em> requests page from <em>RP</em></li>
+        <li><em>RP</em> executes JavaScript:
+          <pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+let p = await navigator.credentials.get(data);</pre></code>
+        </li>
+        <li><em>UA</em> looks for credentials in credential store, finds none.</li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> requests <code>.well-known/fedcm</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> requests
+          <code>json["client_id_metadata_endpoint"]</code> from <em>IDP</em>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>No cookies</li>
+            <li>No referer</li>
+            <li>With <code>client_id</code></il>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns valid JSON response</li>
+        <li><em>UA</em> presents consent sheet to <em>User</em>.
+          Sheet includes <strong>ToS</strong>, <strong>Privacy Policy</strong>
+          and consent to share <strong>name</strong> and <strong>email</strong>
+          with <em>RP</em>.</li>
+        <li><em>User</em> accepts to share information</li>
+        <li><em>UA</em> requests <code>json["accounts_endpoint"]</code>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> presents account chooser sheet to <em>User</em>.
+        Sheet lists all accounts return from the account endpoint.</li>
+        <li><em>User</em> selects an account.</li>
+        <li><em>UA</em> calls
+          <pre><code>const credential = FederatedCredential({
+  accountId: account.id,
+  provider: {
+    clientId: client_id,
+    nonce: nonce
+  }
+});
+p.resolve(credential)</code></pre>
+        </li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="credential-found-in-credential-store">Credential found in credential store</a>
+       <a href="#credential-found-in-credential-store">§</a></h3>
+    <p>The <em>User</em> has previously authenticated to the <em>RP</em> using
+      <em>IDP</em> and called <code>credential.store()</code> to store the
+      returned <code>credential</code> in the <em>UA</em> credential store.</p>
+
+    <div class='wrap'>
+      <img src="img/07 - Credential found in credential store.svg">
+
+      <ol>
+        <li><em>User</em> requests <em>UA</em> load <code>rp.example.com</code></li>
+        <li><em>UA</em> requests page from <em>RP</em></li>
+        <li><em>RP</em> executes JavaScript:
+          <pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+let p = await navigator.credentials.get(data);</pre></code>
+        </li>
+        <li><em>UA</em> looks for credentials in credential store, finds <code>credential</code> for (<em>RP</em>, <em>IDP</em>).</li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>p.resolve(credential)</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="invalid-token-response">Invalid Token Response</a>
+      <a href="#invalid-token-response">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+    Attempts to retrieve tokens and receives an invalid response.</p>
+    <div class='wrap'>
+      <img src="img/08 - Invalid id token response.svg">
+      <ol>
+        <li><em>UA</em> calls <code>auth.resolve(credential)</code></li>
+        <li><em>RP</em> calss <code>credentials.fetchTokens()</code></li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>json["token_endpoint"]</code>
+          <ul>
+            <li><code>POST</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+            <li>With <pre><code>{
+  account_id: "test@example.com",
+  token_request: "id_token",
+  request: {
+    client_id: "1234ab",
+    nonce: "abc234"
+  }
+}</code></pre>
+            </li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns non-200 response, or invalid JSON data</li>
+        <li><em>UA</em> calls <code>p.reject()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="successful-token-request">Successful Token Request</a>
+       <a href="#successful-token-request">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+      The <em>RP</em> makes a default <code>fetchToken()</code> request to
+      and receives the <code>id_token</code> in response.</p>
+
+    <div class='wrap'>
+      <img src="img/09 - Token response.svg">
+
+      <ol>
+        <li><em>UA</em> calls <code>auth.resolve(credential)</code></li>
+        <li><em>RP</em> calls <code>credential.fetchTokens()</code></li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>json["token_endpoint"]</code>
+          <ul>
+            <li><code>POST</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+            <li>With <pre><code>{
+  account_id: "test@example.com",
+  token_request: "id_token",
+  request: {
+    client_id: "1234ab",
+    nonce: "abc234"
+  }
+}</code></pre>
+            </li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns <code>token_data</code> to the <em>UA</em>:
+          <pre><code>{
+  "id_token": "new_minted_token",
+  "nonce": "abc234"
+}</code></pre>
+        </li>
+        <li><em>UA</em> calls <code>p.resolve(token_data)</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="multi-token-request">Multi-Token Request</a>
+       <a href="#multi-token-request">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+      The <em>RP</em> makes a <code>fetchToken()</code> request for multiple
+      tokens and receives the tokens in response.</p>
+
+    <h3>Questions</h3>
+    <ol>
+      <li>Should the token request include a <code>scope</code> parameter?</li>
+      <li>If so, should we expose a <code>scope_description_endpoint</code> in
+        the <code>.well-known/fedcm</code> endpoint so we can request
+        descriptions of the requested scopes and ask user consent?</li>
+    </ol>
+    <br>
+
+    <div class='wrap'>
+      <img src="img/10 - Multi token response.svg">
+
+      <ol>
+        <li><em>UA</em> calls <code>auth.resolve(credential)</code></li>
+        <li><em>RP</em> calls <pre><code>credential.fetchTokens({
+  "tokens": "id_token access_token refresh_token"
+})</code></pre>
+        </li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>json["token_endpoint"]</code>
+          <ul>
+            <li><code>POST</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+            <li>With <pre><code>{
+  account_id: "test@example.com",
+  token_request: "id_token access_token refresh_token",
+  request: {
+    client_id: "1234ab",
+    nonce: "abc234"
+  }
+}</code></pre>
+            </li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns <code>token_data</code> to the <em>UA</em>:
+          <pre><code>{
+  "id_token": "new_minted_token",
+  "access_token": "my_access_token",
+  "refresh_token": "my_refresh_token",
+  "nonce": "abc234"
+}</code></pre>
+        </li>
+        <li><em>UA</em> calls <code>p.resolve(token_data)</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="invalid-token-request">Invalid Token Request</a>
+       <a href="#invalid-token-request">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+     The <em>RP</em> attempts to make an invalid token request.</p>
+
+    <div class='wrap'>
+      <img src="img/11 - Bad Token Request.svg">
+
+      <ol>
+        <li><em>UA</em> calls <code>auth.resolve(credential)</code></li>
+        <li><em>RP</em> calls <pre><code>credential.fetchTokens({
+  "tokens": "unknown_token"
+})</code></pre></li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>p.reject</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="refresh-token-request">Refresh Token Request</a>
+        <a href="#refresh-token-request">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+      Assumes a <code>refresh_token</code> has previously been received.
+      The <em>RP</em> makes a <code>fetchToken()</code> request asking for
+      a new <code>refresh_token</code> and providing the previous
+      <code>refresh_token</code></p>
+
+    <div class='wrap'>
+      <img src="img/12 - Refresh Token Request.svg">
+
+      <ol>
+        <li><em>UA</em> calls <code>auth.resolve(credential)</code></li>
+        <li><em>RP</em> calls <pre><code>credential.fetchTokens({
+  "tokens": "refresh_token",
+  "refresh_token": "my_refresh_token"
+})</code></pre>
+        </li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>json["token_endpoint"]</code>
+          <ul>
+            <li><code>POST</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+            <li>With <pre><code>{
+  account_id: "test@example.com",
+  token_request: "refresh_token",
+  refresh_token: "my_refresh_token",
+  request: {
+    client_id: "1234ab",
+    nonce: "abc234"
+  }
+}</code></pre>
+            </li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns <code>token_data</code> to the <em>UA</em>:
+          <pre><code>{
+  "refresh_token": "a_new_refresh_token",
+  "nonce": "abc234"
+}</code></pre>
+        </li>
+        <li><em>UA</em> calls <code>p.resolve(token_data)</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="revocation-failure">Revocation Failure</a>
+        <a href="#revocation-failure">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+      The <em>User</em> attempts to delete account on <em>RP</em> site but
+      an error is encountered.</p>
+
+    <div class='wrap'>
+      <img src="img/13 - Revocation Failed.svg">
+
+      <ol>
+        <li><em>User</em> visits the <em>RP</em> delete account page.</li>
+        <li><em>RP</em> calls <code>credential.revoke()</code></li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>json["revocation_endpoint"]</code>
+          <ul>
+            <li><code>POST</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+            <li>With <pre><code>{
+    "account_id": "foo@example.com",
+    "request": {
+      "client_id": "1234ab"
+    }
+  }</code></pre>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a non-<code>204</code> response code</li>
+        <li><em>UA</em> calls <code>p.reject()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="revocation-successful">Revocation Successful</a>
+        <a href="#revocation-successful">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+      The <em>User</em> deletes account on the <em>RP</em> site.</p>
+
+    <div class='wrap'>
+      <img src="img/14 - Revocation Successful.svg">
+
+      <ol>
+        <li><em>User</em> visits the <em>RP</em> delete account page.</li>
+        <li><em>RP</em> calls <code>credential.revoke()</code></li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>json["revocation_endpoint"]</code>
+          <ul>
+            <li><code>POST</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With referer of <code>rp.example.com</code></li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+            <li>With <pre><code>{
+    "account_id": "foo@example.com",
+    "request": {
+      "client_id": "1234ab"
+    }
+  }</code></pre>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a <code>204</code> response code</li>
+        <li><em>UA</em> calls <code>p.resolve()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="idp-logout">IDP Logout</a>
+        <a href="#idp-logout">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above for
+      <em>RP1</em> and <em>RP2</em>. The <em>User</em> signs out of the
+      <em>IDP</em> site. The <code>logout</code> endpoint was provided to
+      <em>IDP</em> by <em>RP</em>s during registration.</p>
+
+    <div class='wrap'>
+      <img src="img/15 - IDP Logout.svg">
+
+      <ol>
+        <li><em>User</em> visits the <em>IDP</em> sign out page.</li>
+        <li><em>IDP</em> renders a page in <em>UA</em> with iFrames for each
+          of the RPs the user is signed into requesting the <code>logout</code>
+          endpoint</li>
+        <li><em>UA</em> requests <em>RP1</em>s <code>logout</code> endpoint</li>
+        <li><em>UA</em> requests <em>RP2</em>s <code>logout</code> endpoint</li>
+        <li><em>UA</em> calls <code>p.resolve()</code></li>
+      </ol>
+    </div>
+  </li>
+
+  <li>
+    <h3><a name="rp-logout">RP Logout</a>
+        <a href="#rp-logout">§</a></h3>
+    <p>Assumes a <code>credential</code> has been fetched per flows above.
+      The <em>User</em> signs out of account on the <em>RP</em> site.</p>
+
+    <div class='wrap'>
+      <img src="img/16 - User RP Signout.svg">
+
+      <ol>
+        <li><em>User</em> visits the <em>RP</em> sign out page.</li>
+        <li><em>RP</em> calls <code>navigator.credentials.preventSilentAccess()</code></li>
+        <li><em>UA</em> returns <code>p</code></li>
+        <li><em>UA</em> calls <code>p.resolve()</code></li>
+      </ol>
+    </div>
+  </li>
+  </ol>
+
+
+<h2><a name="code-example">Code Example</a> <a href="#code-example">§</a></h2>
+<pre><code>const data = {
+  federated: {
+    providers: [{
+      url: 'idp.example',
+      clientId: '1234ab',
+      nonce: 'abc123'
+    }]
+  }
+};
+try {
+  let credentials = await navigator.credentials.get(data);
+
+  // Credentials can be stored into the credential store.
+  credentials.store();
+
+  {
+    // ID token only request
+    const token = await credentials.fetchTokens();
+    const id_token = tokens["id_token"];
+  }
+  {
+    // multiple token request
+    const tokens = await credentials.fetchTokens({
+      tokens: "id_token access_token refresh_token"
+    });
+    const id_token = tokens["id_token"];
+    const refresh_token = tokens["refresh_token"];
+    const access_token = tokens["refresh_token"];
+  }
+  {
+    // Refresh Refresh token
+    const tokens = await credentials.fetchTokens({
+      tokens: "refresh_token",
+      refresh_token: old_refresh_token
+    });
+    const refresh_token = tokens["refresh_token"];
+  }
+
+
+  // If the user signs out of RP
+  navigator.credentials.preventSilentAccess();
+
+  // If the user deletes account on RP
+  credentials.revoke();
+} catch (e) {
+  console.error(e);
+}
+</code></pre>
+
+</body>
+</html>

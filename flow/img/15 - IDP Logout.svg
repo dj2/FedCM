@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="-157 10 947 337" width="947" height="337">
+  <defs>
+    <font-face font-family="Avenir" font-size="13" panose-1="2 11 5 3 2 2 3 2 2 4" units-per-em="1000" underline-position="-75" underline-thickness="50" slope="0" x-height="468" cap-height="708" ascent="1e3" descent="-365.9973" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Avenir-Roman"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Avenir" font-size="13" panose-1="2 11 7 3 2 2 3 2 2 4" units-per-em="1000" underline-position="-75" underline-thickness="50" slope="0" x-height="480" cap-height="708" ascent="1e3" descent="-365.9973" font-weight="800">
+      <font-face-src>
+        <font-face-name name="Avenir-Heavy"/>
+      </font-face-src>
+    </font-face>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="StickArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-7 -4 8 8" markerWidth="8" markerHeight="8" color="#666a6b">
+      <g>
+        <path d="M -5.76 0 L 0 0 M 0 2.16 L -5.76 0 L 0 -2.16" fill="none" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.19\n2021-10-31 14:51:51 +0000</metadata>
+  <g id="Canvas_1" stroke-opacity="1" fill-opacity="1" stroke-dasharray="none" stroke="none" fill="none">
+    <title>Canvas 1</title>
+    <rect fill="white" x="-157" y="10" width="947" height="337"/>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_48">
+        <text transform="translate(299.22278 85.22304)" fill="#515556">
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">Sign out</tspan>
+        </text>
+      </g>
+      <g id="Group_44">
+        <title>Class Role</title>
+        <g id="Graphic_46">
+          <title>Object</title>
+          <rect x="-156" y="25.9176" width="130" height="58" fill="white"/>
+          <rect x="-156" y="25.9176" width="130" height="58" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <text transform="translate(-150 45.9176)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="45.1615" y="13">User</tspan>
+          </text>
+        </g>
+        <g id="Line_45">
+          <title>Lifeline</title>
+          <path d="M -91 84.9176 L -91 102.9176 L -91 334.5" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="8.0,8.0" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_40">
+        <title>Class Role</title>
+        <g id="Graphic_43">
+          <title>Object</title>
+          <rect x="174.00294" y="18" width="130" height="58" fill="white"/>
+          <rect x="174.00294" y="18" width="130" height="58" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <text transform="translate(180.00294 38)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="47.0855" y="13">RP2</tspan>
+          </text>
+        </g>
+        <g id="Line_42">
+          <title>Lifeline</title>
+          <line x1="239.00294" y1="77" x2="239.00294" y2="334.5" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="8.0,8.0" stroke-width="2"/>
+        </g>
+        <g id="Graphic_41">
+          <title>Activation</title>
+          <rect x="229.00294" y="190.40868" width="20" height="18" fill="white"/>
+          <rect x="229.00294" y="190.40868" width="20" height="18" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_36">
+        <title>Class Role</title>
+        <g id="Graphic_39">
+          <title>Object</title>
+          <rect x="381.5624" y="15" width="130" height="58" fill="white"/>
+          <rect x="381.5624" y="15" width="130" height="58" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <text transform="translate(387.5624 35)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="49.614" y="13">UA</tspan>
+          </text>
+        </g>
+        <g id="Line_38">
+          <title>Lifeline</title>
+          <path d="M 446.5617 74 L 446.4415 244.86756 L 446 345.5" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="8.0,8.0" stroke-width="2"/>
+        </g>
+        <g id="Graphic_37">
+          <title>Activation</title>
+          <rect x="436.4802" y="143.41065" width="20" height="92.88052" fill="white"/>
+          <rect x="436.4802" y="143.41065" width="20" height="92.88052" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_32">
+        <title>Class Role</title>
+        <g id="Graphic_35">
+          <title>Object</title>
+          <rect x="659" y="11" width="130" height="58" fill="white"/>
+          <rect x="659" y="11" width="130" height="58" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <text transform="translate(665 31)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="48.288" y="13">IDP</tspan>
+          </text>
+        </g>
+        <g id="Line_34">
+          <title>Lifeline</title>
+          <line x1="724" y1="70" x2="724" y2="341.5" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="8.0,8.0" stroke-width="2"/>
+        </g>
+        <g id="Graphic_33">
+          <title>Activation</title>
+          <rect x="714" y="102.02308" width="20" height="81.58629" fill="white"/>
+          <rect x="714" y="102.02308" width="20" height="81.58629" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_29">
+        <title>Start</title>
+        <g id="Graphic_31">
+          <text transform="translate(-109.9656 92.9176)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="0" y="13">1</tspan>
+          </text>
+        </g>
+        <g id="Graphic_30">
+          <title>Circle</title>
+          <ellipse cx="-125" cy="101.9176" rx="6.50001038636233" ry="5.05556363383736" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        </g>
+      </g>
+      <g id="Group_5">
+        <title>Start</title>
+        <g id="Graphic_7">
+          <text transform="translate(765.5344 126)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="0" y="13">2</tspan>
+          </text>
+        </g>
+        <g id="Graphic_6">
+          <title>Circle</title>
+          <ellipse cx="750.5" cy="135" rx="6.50001038636228" ry="5.05556363383738" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        </g>
+      </g>
+      <g id="Group_49">
+        <title>Class Role</title>
+        <g id="Graphic_52">
+          <title>Object</title>
+          <rect x="19.1248" y="18" width="130" height="58" fill="white"/>
+          <rect x="19.1248" y="18" width="130" height="58" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <text transform="translate(25.1248 38)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="47.0855" y="13">RP1</tspan>
+          </text>
+        </g>
+        <g id="Line_51">
+          <title>Lifeline</title>
+          <line x1="84.1248" y1="77" x2="84.1248" y2="334.5" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="8.0,8.0" stroke-width="2"/>
+        </g>
+        <g id="Graphic_50">
+          <title>Activation</title>
+          <rect x="74.1248" y="237.63358" width="20" height="31" fill="white"/>
+          <rect x="74.1248" y="237.63358" width="20" height="31" stroke="#b9c0c1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Line_54">
+        <title>Simple Message</title>
+        <line x1="471.30017" y1="143.37645" x2="714" y2="142.81623" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+      </g>
+      <g id="Line_56">
+        <title>Simple Message</title>
+        <line x1="263.82287" y1="190.36458" x2="436.4802" y2="189.85091" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+      </g>
+      <g id="Line_47">
+        <title>Simple Message</title>
+        <path d="M 699.18 102.03955 L 453.04177 102.31306 C 453.03455 95.81307 440.03456 95.82751 440.0418 102.32751 L 245.50293 102.54368 C 245.4957 96.04368 232.49572 96.05813 232.50294 102.55812 L 90.6248 102.71578 C 90.61757 96.21578 77.61758 96.23023 77.6248 102.73022 L -91 102.9176" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+      </g>
+      <g id="Group_58">
+        <title>Start</title>
+        <g id="Graphic_60">
+          <text transform="translate(487.8156 219)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="0" y="13">4</tspan>
+          </text>
+        </g>
+        <g id="Graphic_59">
+          <title>Circle</title>
+          <ellipse cx="472.7812" cy="228" rx="6.50001038636236" ry="5.05556363383737" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        </g>
+      </g>
+      <g id="Line_67">
+        <title>Simple Message</title>
+        <path d="M 108.94469 237.57547 L 232.503 237.091 C 232.4775 230.59104 245.4774 230.54006 245.5029 237.04 L 436.4802 236.29118" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+      </g>
+      <g id="Group_68">
+        <title>Start</title>
+        <g id="Graphic_70">
+          <text transform="translate(487.8156 167.25)" fill="#515556">
+            <tspan font-family="Avenir" font-size="13" font-weight="800" fill="#515556" x="0" y="13">3</tspan>
+          </text>
+        </g>
+        <g id="Graphic_69">
+          <title>Circle</title>
+          <ellipse cx="472.7812" cy="176.25" rx="6.50001038636236" ry="5.05556363383737" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        </g>
+      </g>
+      <g id="Graphic_71">
+        <text transform="translate(528.85126 125.83298)" fill="#515556">
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">Render logout page</tspan>
+        </text>
+      </g>
+      <g id="Graphic_72">
+        <text transform="translate(305.4851 172.102)" fill="#515556">
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">fetch logout</tspan>
+        </text>
+      </g>
+      <g id="Graphic_73">
+        <text transform="translate(307.09292 219.46418)" fill="#515556">
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">fetch logout</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
