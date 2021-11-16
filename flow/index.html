@@ -380,12 +380,23 @@ let p = await navigator.credentials.get(data);</pre></code>
           </ul>
         </li>
         <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> requests <code>json["accounts_endpoint"]</code>
+          <ul>
+            <li><code>GET</code> request</li>
+            <li>With <em>IDP</em> cookies</li>
+            <li>With <code>Sec-FedCM-CSRF</code></li>
+          </ul>
+        </li>
+        <li><em>IDP</em> returns a valid JSON response</li>
+        <li><em>UA</em> presents account chooser sheet to <em>User</em>.
+        Sheet lists all accounts return from the account endpoint.</li>
+        <li><em>User</em> selects an account.</li>
         <li><em>UA</em> requests
           <code>json["client_id_metadata_endpoint"]</code> from <em>IDP</em>
           <ul>
             <li><code>GET</code> request</li>
             <li>No cookies</li>
-            <li>No referer</li>
+            <li>With a referer <code>rp.example.com</code></li>
             <li>With <code>client_id</code></il>
             <li>With <code>Sec-FedCM-CSRF</code></li>
           </ul>
@@ -396,18 +407,6 @@ let p = await navigator.credentials.get(data);</pre></code>
           and consent to share <strong>name</strong> and <strong>email</strong>
           with <em>RP</em>.</li>
         <li><em>User</em> accepts to share information</li>
-        <li><em>UA</em> requests <code>json["accounts_endpoint"]</code>
-          <ul>
-            <li><code>GET</code> request</li>
-            <li>With <em>IDP</em> cookies</li>
-            <li>With referer of <code>rp.example.com</code></li>
-            <li>With <code>Sec-FedCM-CSRF</code></li>
-          </ul>
-        </li>
-        <li><em>IDP</em> returns a valid JSON response</li>
-        <li><em>UA</em> presents account chooser sheet to <em>User</em>.
-        Sheet lists all accounts return from the account endpoint.</li>
-        <li><em>User</em> selects an account.</li>
         <li><em>UA</em> calls
           <pre><code>const credential = FederatedCredential({
   accountId: account.id,

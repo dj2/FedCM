@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="-731 -398 949 548" width="949" height="548">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="-731 -398 949 548" width="949" height="548">
   <defs>
     <font-face font-family="Avenir" font-size="13" panose-1="2 11 5 3 2 2 3 2 2 4" units-per-em="1000" underline-position="-75" underline-thickness="50" slope="0" x-height="468" cap-height="708" ascent="1e3" descent="-365.9973" font-weight="400">
       <font-face-src>
@@ -23,8 +23,8 @@
       </font-face-src>
     </font-face>
   </defs>
-  <metadata> Produced by OmniGraffle 7.19\n2021-10-31 00:17:40 +0000</metadata>
-  <g id="Canvas_1" stroke-opacity="1" fill-opacity="1" stroke-dasharray="none" stroke="none" fill="none">
+  <metadata> Produced by OmniGraffle 7.19.2\n2021-11-16 15:07:01 +0000</metadata>
+  <g id="Canvas_1" stroke-opacity="1" fill-opacity="1" stroke-dasharray="none" fill="none" stroke="none">
     <title>Canvas 1</title>
     <rect fill="white" x="-731" y="-398" width="949" height="548"/>
     <g id="Canvas_1_Layer_1">
@@ -48,7 +48,7 @@
         </text>
       </g>
       <g id="Graphic_102">
-        <text transform="translate(-374.28104 -79.41248)" fill="#515556">
+        <text transform="translate(-370.5512 30.218434)" fill="#515556">
           <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="6536993e-19" y="13">Show consent for RP to sign into IDP</tspan>
         </text>
       </g>
@@ -71,7 +71,7 @@
         <line x1="-149.7576" y1="-316.87132" x2="-665" y2="-317" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Graphic_97">
-        <text transform="translate(-560.4804 -50.82059)" fill="#515556">
+        <text transform="translate(-560.4609 59.1574)" fill="#515556">
           <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="24868996e-20" y="13">Accept</tspan>
         </text>
       </g>
@@ -147,11 +147,11 @@
       </g>
       <g id="Line_82">
         <title>Simple Message</title>
-        <path d="M -640.18 -61.76732 L -391.86344 -61.67654 C -391.86107 -68.17654 -378.86107 -68.171784 -378.86345 -61.671785 L -134.36345 -61.5824" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+        <path d="M -640.18 48 L -391.86345 48 C -391.86345 41.5 -378.86345 41.5 -378.86345 48 L -129.46429 48" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Line_81">
         <title>Simple Message</title>
-        <path d="M -149.18344 -31.18784 L -378.86345 -30.99935 C -378.8688 -37.499347 -391.8688 -37.48868 -391.86344 -30.98868 L -655 -30.772735" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+        <path d="M -149.18344 79.48577 L -378.86345 79.26519 C -378.8572 72.76519 -391.8572 72.75271 -391.86344 79.25271 L -655 79" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Group_77">
         <title>Class Role</title>
@@ -198,10 +198,10 @@
       </g>
       <g id="Line_71">
         <title>Simple Message</title>
-        <line x1="127.18004" y1="-13.742336" x2="-114.36345" y2="-13.2" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+        <line x1="129.38" y1="-121.56092" x2="-114.36345" y2="-121.4" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Graphic_70">
-        <text transform="translate(-67.0771 -30.46229)" fill="#515556">
+        <text transform="translate(-66.02689 -138.47135)" fill="#515556">
           <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="2557954e-19" y="13">Fetch accounts_endpoint</tspan>
         </text>
       </g>
@@ -215,9 +215,8 @@
         <line x1="-99.54358" y1="16.072809" x2="142" y2="15.031179" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Graphic_67">
-        <text transform="translate(-59.06681 -.8614261)" fill="#515556">
-          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">JSON account data</tspan>
-          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="31">with at least one account</tspan>
+        <text transform="translate(-30.9042 .16358491)" fill="#515556">
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">200 JSON data</tspan>
         </text>
       </g>
       <g id="Graphic_66">
@@ -227,11 +226,11 @@
       </g>
       <g id="Line_65">
         <title>Simple Message</title>
-        <line x1="129.38" y1="-121.56092" x2="-114.36345" y2="-121.4" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+        <line x1="127.18004" y1="-13.742336" x2="-114.36345" y2="-13.2" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Graphic_64">
-        <text transform="translate(-88.53607 -140.6921)" fill="#515556">
-          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="7105427e-19" y="13">Fetch client_id_metadata_endpoint</tspan>
+        <text transform="translate(-105.12443 -32.694385)" fill="#515556">
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="15.412317" y="13">Fetch client_id_metadata_endpoint</tspan>
         </text>
       </g>
       <g id="Graphic_63">
@@ -249,27 +248,28 @@
         <line x1="-99.54345" y1="-92.5928" x2="144.2" y2="-92.76391" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Graphic_60">
-        <text transform="translate(-29.78289 -110.66147)" fill="#515556">
-          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">200 JSON data</tspan>
+        <text transform="translate(-56.043076 -110.67315)" fill="#515556">
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">JSON account data with</tspan>
+          <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="3.107" y="31">more then one account</tspan>
         </text>
       </g>
       <g id="Line_59">
         <title>Simple Message</title>
-        <path d="M -640.18 47.975427 L -391.86344 47.563686 C -391.8742 41.063695 -378.87423 41.04214 -378.86345 47.54213 L -134.36345 47.13672" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+        <path d="M -640.18 -61.76732 L -391.86344 -61.67654 C -391.86107 -68.17654 -378.86107 -68.171784 -378.86345 -61.671785 L -134.36345 -61.5824" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Graphic_58">
-        <text transform="translate(-338.76768 30.66945)" fill="#515556">
+        <text transform="translate(-338.7521 -78.3304)" fill="#515556">
           <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="0" y="13">Show account chooser</tspan>
         </text>
       </g>
       <g id="Graphic_57">
-        <text transform="translate(-590.3349 59.1574)" fill="#515556">
+        <text transform="translate(-590.3544 -50.82059)" fill="#515556">
           <tspan font-family="Avenir" font-size="13" font-weight="400" fill="#515556" x="42632564e-21" y="13">Account selected</tspan>
         </text>
       </g>
       <g id="Line_56">
         <title>Simple Message</title>
-        <path d="M -149.18344 79.48577 L -378.86345 79.26519 C -378.8572 72.76519 -391.8572 72.75271 -391.86344 79.25271 L -655 79" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
+        <path d="M -149.18344 -31.18784 L -378.86345 -30.99935 C -378.8688 -37.499347 -391.8688 -37.48868 -391.86344 -30.98868 L -655 -30.772735" marker-start="url(#StickArrow_Marker)" stroke="#666a6b" stroke-linecap="square" stroke-linejoin="bevel" stroke-width="2"/>
       </g>
       <g id="Line_55">
         <title>Simple Message</title>
