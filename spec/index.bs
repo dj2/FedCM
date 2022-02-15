@@ -1043,6 +1043,7 @@ dictionary FederatedAccountLoginRequest {
   USVString nonce;
   bool silent;
   AbortSignal signal;
+  USVString mode;
 };
 
 [Exposed=Window, SecureContext]
@@ -1074,6 +1075,15 @@ dictionary FederatedAccount {
           Default: false
     :   <dfn>signal</dfn>
     ::  Abort signal
+    :   <dfn>mode</dfn>
+    ::  The mode of access desired. Used as a hint by the UA to request
+        different priviledge levels.
+
+        Values:
+         * mediated
+         * permissions
+
+         Default: mediated
 </dl>
 
 <dl dfn-type="argument" dfn-for="FederatedAccount">
@@ -1244,6 +1254,8 @@ dictionary FederatedAuthorizationRequest {
 
   USVString tokens;
   USVString scopes;
+
+  USVString mode;
 };
 
 [Exposed=Window, SecureContext]
@@ -1274,6 +1286,15 @@ partial interface FederatedCredential {
     ::  The list of tokens the [=RP=] will require
     :   <dfn>scopes</dfn>
     ::  The list of scopes the [=RP=] will require
+    :   <dfn>mode</dfn>
+    ::  The mode of access desired. Used as a hint by the UA to request
+        different priviledge levels.
+
+        Values:
+         * mediated
+         * permissions
+
+         Default: mediated
 </dl>
 
 The |tokens| and |scopes| MAY affect the dialog presented to the user to makes
